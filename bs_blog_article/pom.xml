@@ -19,15 +19,28 @@
     </properties>
 
     <modules>
+        <module>../bs_blog_gateway</module>
+        <module>../bs_blog_engine</module>
         <module>../bs_blog_utils</module>
+        <module>../bs_blog_version</module>
+        <module>../bs_blog_video</module>
     </modules>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -54,5 +67,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

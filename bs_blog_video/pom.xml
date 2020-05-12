@@ -20,6 +20,7 @@
 
     <modules>
         <module>../bs_blog_utils</module>
+        <module>../bs_blog_version</module>
     </modules>
 
     <dependencies>
