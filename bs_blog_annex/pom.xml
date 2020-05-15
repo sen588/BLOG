@@ -18,15 +18,11 @@
         <java.version>1.8</java.version>
     </properties>
 
-    <!--<modules>
-        <module>../bs_blog_utils</module>
-        <module>../bs_blog_version</module>
-    </modules>-->
-
     <dependencies>
+        <!--继承utils-->
         <dependency>
             <groupId>com.bgamq</groupId>
-            <artifactId>bs_blog_version</artifactId>
+            <artifactId>bs_blog_utils</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
@@ -34,7 +30,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>${lomboks.version}</version>
+            <version>1.18.12</version>
         </dependency>
 
         <dependency>

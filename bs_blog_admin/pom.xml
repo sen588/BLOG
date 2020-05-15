@@ -19,6 +19,13 @@
     </properties>
 
     <dependencies>
+        <!--继承utils-->
+        <dependency>
+            <groupId>com.bgamq</groupId>
+            <artifactId>bs_blog_utils</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
