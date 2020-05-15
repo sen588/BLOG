@@ -22,7 +22,7 @@
         <!--继承utils-->
         <dependency>
             <groupId>com.bgamq</groupId>
-            <artifactId>bs_blog_utils</artifactId>
+            <artifactId>bs_blog_core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
