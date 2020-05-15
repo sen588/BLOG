@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bgamq.utils.mapper.TSysLogMapper" >
+  <resultMap id="BaseResultMap" type="com.bgamq.utils.entity.TSysLog" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="admin_uid" property="adminUid" jdbcType="VARCHAR" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="class_path" property="classPath" jdbcType="VARCHAR" />
+    <result column="method" property="method" jdbcType="VARCHAR" />
+    <result column="operation" property="operation" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="ip_source" property="ipSource" jdbcType="VARCHAR" />
+    <result column="spend_time" property="spendTime" jdbcType="INTEGER" />
+    <result column="is_del" property="isDel" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.bgamq.utils.entity.TSysLog" extends="BaseResultMap" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="params" property="params" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    uid, user_name, admin_uid, ip, url, type, class_path, method, operation, status, 
+    create_time, update_time, ip_source, spend_time, is_del
+  </sql>
+  <sql id="Blob_Column_List" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    params
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.bgamq.utils.entity.TSysLogExample" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_sys_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bgamq.utils.entity.TSysLogExample" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_sys_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.bgamq.utils.entity.TSysLogExample" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    delete from t_sys_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.bgamq.utils.entity.TSysLogExample" resultType="java.lang.Integer" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select count(*) from t_sys_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update t_sys_log
+    <set >
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminUid != null" >
+        admin_uid = #{record.adminUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ip != null" >
+        ip = #{record.ip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null" >
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classPath != null" >
+        class_path = #{record.classPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.method != null" >
+        method = #{record.method,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operation != null" >
+        operation = #{record.operation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ipSource != null" >
+        ip_source = #{record.ipSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spendTime != null" >
+        spend_time = #{record.spendTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.isDel != null" >
+        is_del = #{record.isDel,jdbcType=TINYINT},
+      </if>
+      <if test="record.params != null" >
+        params = #{record.params,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update t_sys_log
+    set uid = #{record.uid,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      admin_uid = #{record.adminUid,jdbcType=VARCHAR},
+      ip = #{record.ip,jdbcType=VARCHAR},
+      url = #{record.url,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      class_path = #{record.classPath,jdbcType=VARCHAR},
+      method = #{record.method,jdbcType=VARCHAR},
+      operation = #{record.operation,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=TINYINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      ip_source = #{record.ipSource,jdbcType=VARCHAR},
+      spend_time = #{record.spendTime,jdbcType=INTEGER},
+      is_del = #{record.isDel,jdbcType=TINYINT},
+      params = #{record.params,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update t_sys_log
+    set uid = #{record.uid,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      admin_uid = #{record.adminUid,jdbcType=VARCHAR},
+      ip = #{record.ip,jdbcType=VARCHAR},
+      url = #{record.url,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      class_path = #{record.classPath,jdbcType=VARCHAR},
+      method = #{record.method,jdbcType=VARCHAR},
+      operation = #{record.operation,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=TINYINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      ip_source = #{record.ipSource,jdbcType=VARCHAR},
+      spend_time = #{record.spendTime,jdbcType=INTEGER},
+      is_del = #{record.isDel,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
