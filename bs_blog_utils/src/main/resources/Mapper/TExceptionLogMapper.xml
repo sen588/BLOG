@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bgamq.utils.dao.TExceptionLogMapper" >
+  <resultMap id="BaseResultMap" type="com.bgamq.utils.entity.TExceptionLog" >
+    <id column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="BIT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="ip_source" property="ipSource" jdbcType="VARCHAR" />
+    <result column="method" property="method" jdbcType="VARCHAR" />
+    <result column="operation" property="operation" jdbcType="VARCHAR" />
+    <result column="is_del" property="isDel" jdbcType="BIT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.bgamq.utils.entity.TExceptionLogWithBLOBs" extends="BaseResultMap" >
+    <result column="exception_json" property="exceptionJson" jdbcType="LONGVARCHAR" />
+    <result column="exception_message" property="exceptionMessage" jdbcType="LONGVARCHAR" />
+    <result column="params" property="params" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    uid, status, create_time, update_time, ip, ip_source, method, operation, is_del
+  </sql>
+  <sql id="Blob_Column_List" >
+    exception_json, exception_message, params
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.bgamq.utils.entity.TExceptionLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_exception_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bgamq.utils.entity.TExceptionLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_exception_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_exception_log
+    where uid = #{uid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_exception_log
+    where uid = #{uid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bgamq.utils.entity.TExceptionLogExample" >
+    delete from t_exception_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bgamq.utils.entity.TExceptionLogWithBLOBs" >
+    insert into t_exception_log (uid, status, create_time, 
+      update_time, ip, ip_source, 
+      method, operation, is_del, 
+      exception_json, exception_message, 
+      params)
+    values (#{uid,jdbcType=VARCHAR}, #{status,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{ip,jdbcType=VARCHAR}, #{ipSource,jdbcType=VARCHAR}, 
+      #{method,jdbcType=VARCHAR}, #{operation,jdbcType=VARCHAR}, #{isDel,jdbcType=BIT}, 
+      #{exceptionJson,jdbcType=LONGVARCHAR}, #{exceptionMessage,jdbcType=LONGVARCHAR}, 
+      #{params,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bgamq.utils.entity.TExceptionLogWithBLOBs" >
+    insert into t_exception_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="ipSource != null" >
+        ip_source,
+      </if>
+      <if test="method != null" >
+        method,
+      </if>
+      <if test="operation != null" >
+        operation,
+      </if>
+      <if test="isDel != null" >
+        is_del,
+      </if>
+      <if test="exceptionJson != null" >
+        exception_json,
+      </if>
+      <if test="exceptionMessage != null" >
+        exception_message,
+      </if>
+      <if test="params != null" >
+        params,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="ipSource != null" >
+        #{ipSource,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null" >
+        #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="operation != null" >
+        #{operation,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null" >
+        #{isDel,jdbcType=BIT},
+      </if>
+      <if test="exceptionJson != null" >
+        #{exceptionJson,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="exceptionMessage != null" >
+        #{exceptionMessage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="params != null" >
+        #{params,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bgamq.utils.entity.TExceptionLogExample" resultType="java.lang.Integer" >
+    select count(*) from t_exception_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_exception_log
+    <set >
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=BIT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ip != null" >
+        ip = #{record.ip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ipSource != null" >
+        ip_source = #{record.ipSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.method != null" >
+        method = #{record.method,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operation != null" >
+        operation = #{record.operation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDel != null" >
+        is_del = #{record.isDel,jdbcType=BIT},
+      </if>
+      <if test="record.exceptionJson != null" >
+        exception_json = #{record.exceptionJson,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.exceptionMessage != null" >
+        exception_message = #{record.exceptionMessage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.params != null" >
+        params = #{record.params,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_exception_log
+    set uid = #{record.uid,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=BIT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      ip = #{record.ip,jdbcType=VARCHAR},
+      ip_source = #{record.ipSource,jdbcType=VARCHAR},
+      method = #{record.method,jdbcType=VARCHAR},
+      operation = #{record.operation,jdbcType=VARCHAR},
+      is_del = #{record.isDel,jdbcType=BIT},
+      exception_json = #{record.exceptionJson,jdbcType=LONGVARCHAR},
+      exception_message = #{record.exceptionMessage,jdbcType=LONGVARCHAR},
+      params = #{record.params,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_exception_log
+    set uid = #{record.uid,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=BIT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      ip = #{record.ip,jdbcType=VARCHAR},
+      ip_source = #{record.ipSource,jdbcType=VARCHAR},
+      method = #{record.method,jdbcType=VARCHAR},
+      operation = #{record.operation,jdbcType=VARCHAR},
+      is_del = #{record.isDel,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bgamq.utils.entity.TExceptionLogWithBLOBs" >
+    update t_exception_log
+    <set >
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="ipSource != null" >
+        ip_source = #{ipSource,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null" >
+        method = #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="operation != null" >
+        operation = #{operation,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null" >
+        is_del = #{isDel,jdbcType=BIT},
+      </if>
+      <if test="exceptionJson != null" >
+        exception_json = #{exceptionJson,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="exceptionMessage != null" >
+        exception_message = #{exceptionMessage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="params != null" >
+        params = #{params,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bgamq.utils.entity.TExceptionLogWithBLOBs" >
+    update t_exception_log
+    set status = #{status,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      ip = #{ip,jdbcType=VARCHAR},
+      ip_source = #{ipSource,jdbcType=VARCHAR},
+      method = #{method,jdbcType=VARCHAR},
+      operation = #{operation,jdbcType=VARCHAR},
+      is_del = #{isDel,jdbcType=BIT},
+      exception_json = #{exceptionJson,jdbcType=LONGVARCHAR},
+      exception_message = #{exceptionMessage,jdbcType=LONGVARCHAR},
+      params = #{params,jdbcType=LONGVARCHAR}
+    where uid = #{uid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bgamq.utils.entity.TExceptionLog" >
+    update t_exception_log
+    set status = #{status,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      ip = #{ip,jdbcType=VARCHAR},
+      ip_source = #{ipSource,jdbcType=VARCHAR},
+      method = #{method,jdbcType=VARCHAR},
+      operation = #{operation,jdbcType=VARCHAR},
+      is_del = #{isDel,jdbcType=BIT}
+    where uid = #{uid,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bgamq.utils.dao.TBlogMapper" >
+  <resultMap id="BaseResultMap" type="com.bgamq.utils.entity.TBlog" >
+    <id column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="summary" property="summary" jdbcType="VARCHAR" />
+    <result column="tag_uid" property="tagUid" jdbcType="VARCHAR" />
+    <result column="click_count" property="clickCount" jdbcType="INTEGER" />
+    <result column="collect_count" property="collectCount" jdbcType="INTEGER" />
+    <result column="file_uid" property="fileUid" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="BIT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="admin_uid" property="adminUid" jdbcType="VARCHAR" />
+    <result column="is_original" property="isOriginal" jdbcType="VARCHAR" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="articles_part" property="articlesPart" jdbcType="VARCHAR" />
+    <result column="blog_sort_uid" property="blogSortUid" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="BIT" />
+    <result column="is_publish" property="isPublish" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="start_comment" property="startComment" jdbcType="BIT" />
+    <result column="is_del" property="isDel" jdbcType="BIT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.bgamq.utils.entity.TBlog" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    uid, title, summary, tag_uid, click_count, collect_count, file_uid, status, create_time, 
+    update_time, admin_uid, is_original, author, articles_part, blog_sort_uid, level, 
+    is_publish, sort, start_comment, is_del
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.bgamq.utils.entity.TBlogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_blog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bgamq.utils.entity.TBlogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_blog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_blog
+    where uid = #{uid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_blog
+    where uid = #{uid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bgamq.utils.entity.TBlogExample" >
+    delete from t_blog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bgamq.utils.entity.TBlog" >
+    insert into t_blog (uid, title, summary, 
+      tag_uid, click_count, collect_count, 
+      file_uid, status, create_time, 
+      update_time, admin_uid, is_original, 
+      author, articles_part, blog_sort_uid, 
+      level, is_publish, sort, 
+      start_comment, is_del, content
+      )
+    values (#{uid,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, 
+      #{tagUid,jdbcType=VARCHAR}, #{clickCount,jdbcType=INTEGER}, #{collectCount,jdbcType=INTEGER}, 
+      #{fileUid,jdbcType=VARCHAR}, #{status,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{adminUid,jdbcType=VARCHAR}, #{isOriginal,jdbcType=VARCHAR}, 
+      #{author,jdbcType=VARCHAR}, #{articlesPart,jdbcType=VARCHAR}, #{blogSortUid,jdbcType=VARCHAR}, 
+      #{level,jdbcType=BIT}, #{isPublish,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
+      #{startComment,jdbcType=BIT}, #{isDel,jdbcType=BIT}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bgamq.utils.entity.TBlog" >
+    insert into t_blog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="summary != null" >
+        summary,
+      </if>
+      <if test="tagUid != null" >
+        tag_uid,
+      </if>
+      <if test="clickCount != null" >
+        click_count,
+      </if>
+      <if test="collectCount != null" >
+        collect_count,
+      </if>
+      <if test="fileUid != null" >
+        file_uid,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="adminUid != null" >
+        admin_uid,
+      </if>
+      <if test="isOriginal != null" >
+        is_original,
+      </if>
+      <if test="author != null" >
+        author,
+      </if>
+      <if test="articlesPart != null" >
+        articles_part,
+      </if>
+      <if test="blogSortUid != null" >
+        blog_sort_uid,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="isPublish != null" >
+        is_publish,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="startComment != null" >
+        start_comment,
+      </if>
+      <if test="isDel != null" >
+        is_del,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null" >
+        #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="tagUid != null" >
+        #{tagUid,jdbcType=VARCHAR},
+      </if>
+      <if test="clickCount != null" >
+        #{clickCount,jdbcType=INTEGER},
+      </if>
+      <if test="collectCount != null" >
+        #{collectCount,jdbcType=INTEGER},
+      </if>
+      <if test="fileUid != null" >
+        #{fileUid,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adminUid != null" >
+        #{adminUid,jdbcType=VARCHAR},
+      </if>
+      <if test="isOriginal != null" >
+        #{isOriginal,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="articlesPart != null" >
+        #{articlesPart,jdbcType=VARCHAR},
+      </if>
+      <if test="blogSortUid != null" >
+        #{blogSortUid,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=BIT},
+      </if>
+      <if test="isPublish != null" >
+        #{isPublish,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="startComment != null" >
+        #{startComment,jdbcType=BIT},
+      </if>
+      <if test="isDel != null" >
+        #{isDel,jdbcType=BIT},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bgamq.utils.entity.TBlogExample" resultType="java.lang.Integer" >
+    select count(*) from t_blog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_blog
+    <set >
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.summary != null" >
+        summary = #{record.summary,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tagUid != null" >
+        tag_uid = #{record.tagUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clickCount != null" >
+        click_count = #{record.clickCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.collectCount != null" >
+        collect_count = #{record.collectCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.fileUid != null" >
+        file_uid = #{record.fileUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=BIT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.adminUid != null" >
+        admin_uid = #{record.adminUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isOriginal != null" >
+        is_original = #{record.isOriginal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.author != null" >
+        author = #{record.author,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articlesPart != null" >
+        articles_part = #{record.articlesPart,jdbcType=VARCHAR},
+      </if>
+      <if test="record.blogSortUid != null" >
+        blog_sort_uid = #{record.blogSortUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level != null" >
+        level = #{record.level,jdbcType=BIT},
+      </if>
+      <if test="record.isPublish != null" >
+        is_publish = #{record.isPublish,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.startComment != null" >
+        start_comment = #{record.startComment,jdbcType=BIT},
+      </if>
+      <if test="record.isDel != null" >
+        is_del = #{record.isDel,jdbcType=BIT},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_blog
+    set uid = #{record.uid,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      summary = #{record.summary,jdbcType=VARCHAR},
+      tag_uid = #{record.tagUid,jdbcType=VARCHAR},
+      click_count = #{record.clickCount,jdbcType=INTEGER},
+      collect_count = #{record.collectCount,jdbcType=INTEGER},
+      file_uid = #{record.fileUid,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=BIT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      admin_uid = #{record.adminUid,jdbcType=VARCHAR},
+      is_original = #{record.isOriginal,jdbcType=VARCHAR},
+      author = #{record.author,jdbcType=VARCHAR},
+      articles_part = #{record.articlesPart,jdbcType=VARCHAR},
+      blog_sort_uid = #{record.blogSortUid,jdbcType=VARCHAR},
+      level = #{record.level,jdbcType=BIT},
+      is_publish = #{record.isPublish,jdbcType=VARCHAR},
+      sort = #{record.sort,jdbcType=INTEGER},
+      start_comment = #{record.startComment,jdbcType=BIT},
+      is_del = #{record.isDel,jdbcType=BIT},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_blog
+    set uid = #{record.uid,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      summary = #{record.summary,jdbcType=VARCHAR},
+      tag_uid = #{record.tagUid,jdbcType=VARCHAR},
+      click_count = #{record.clickCount,jdbcType=INTEGER},
+      collect_count = #{record.collectCount,jdbcType=INTEGER},
+      file_uid = #{record.fileUid,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=BIT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      admin_uid = #{record.adminUid,jdbcType=VARCHAR},
+      is_original = #{record.isOriginal,jdbcType=VARCHAR},
+      author = #{record.author,jdbcType=VARCHAR},
+      articles_part = #{record.articlesPart,jdbcType=VARCHAR},
+      blog_sort_uid = #{record.blogSortUid,jdbcType=VARCHAR},
+      level = #{record.level,jdbcType=BIT},
+      is_publish = #{record.isPublish,jdbcType=VARCHAR},
+      sort = #{record.sort,jdbcType=INTEGER},
+      start_comment = #{record.startComment,jdbcType=BIT},
+      is_del = #{record.isDel,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bgamq.utils.entity.TBlog" >
+    update t_blog
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null" >
+        summary = #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="tagUid != null" >
+        tag_uid = #{tagUid,jdbcType=VARCHAR},
+      </if>
+      <if test="clickCount != null" >
+        click_count = #{clickCount,jdbcType=INTEGER},
+      </if>
+      <if test="collectCount != null" >
+        collect_count = #{collectCount,jdbcType=INTEGER},
+      </if>
+      <if test="fileUid != null" >
+        file_uid = #{fileUid,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adminUid != null" >
+        admin_uid = #{adminUid,jdbcType=VARCHAR},
+      </if>
+      <if test="isOriginal != null" >
+        is_original = #{isOriginal,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="articlesPart != null" >
+        articles_part = #{articlesPart,jdbcType=VARCHAR},
+      </if>
+      <if test="blogSortUid != null" >
+        blog_sort_uid = #{blogSortUid,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=BIT},
+      </if>
+      <if test="isPublish != null" >
+        is_publish = #{isPublish,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="startComment != null" >
+        start_comment = #{startComment,jdbcType=BIT},
+      </if>
+      <if test="isDel != null" >
+        is_del = #{isDel,jdbcType=BIT},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bgamq.utils.entity.TBlog" >
+    update t_blog
+    set title = #{title,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR},
+      tag_uid = #{tagUid,jdbcType=VARCHAR},
+      click_count = #{clickCount,jdbcType=INTEGER},
+      collect_count = #{collectCount,jdbcType=INTEGER},
+      file_uid = #{fileUid,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      admin_uid = #{adminUid,jdbcType=VARCHAR},
+      is_original = #{isOriginal,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      articles_part = #{articlesPart,jdbcType=VARCHAR},
+      blog_sort_uid = #{blogSortUid,jdbcType=VARCHAR},
+      level = #{level,jdbcType=BIT},
+      is_publish = #{isPublish,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      start_comment = #{startComment,jdbcType=BIT},
+      is_del = #{isDel,jdbcType=BIT},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where uid = #{uid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bgamq.utils.entity.TBlog" >
+    update t_blog
+    set title = #{title,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR},
+      tag_uid = #{tagUid,jdbcType=VARCHAR},
+      click_count = #{clickCount,jdbcType=INTEGER},
+      collect_count = #{collectCount,jdbcType=INTEGER},
+      file_uid = #{fileUid,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      admin_uid = #{adminUid,jdbcType=VARCHAR},
+      is_original = #{isOriginal,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      articles_part = #{articlesPart,jdbcType=VARCHAR},
+      blog_sort_uid = #{blogSortUid,jdbcType=VARCHAR},
+      level = #{level,jdbcType=BIT},
+      is_publish = #{isPublish,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      start_comment = #{startComment,jdbcType=BIT},
+      is_del = #{isDel,jdbcType=BIT}
+    where uid = #{uid,jdbcType=VARCHAR}
+  </update>
+</mapper>

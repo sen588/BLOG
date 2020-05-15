@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bgamq.utils.dao.TCommentMapper" >
+  <resultMap id="BaseResultMap" type="com.bgamq.utils.entity.TComment" >
+    <id column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="user_uid" property="userUid" jdbcType="VARCHAR" />
+    <result column="to_uid" property="toUid" jdbcType="VARCHAR" />
+    <result column="to_user_uid" property="toUserUid" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="blog_uid" property="blogUid" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="BIT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="source" property="source" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="BIT" />
+    <result column="first_comment_uid" property="firstCommentUid" jdbcType="VARCHAR" />
+    <result column="is_del" property="isDel" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    uid, user_uid, to_uid, to_user_uid, content, blog_uid, status, create_time, update_time, 
+    source, TYPE, first_comment_uid, is_del
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bgamq.utils.entity.TCommentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_comment
+    where uid = #{uid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_comment
+    where uid = #{uid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bgamq.utils.entity.TCommentExample" >
+    delete from t_comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bgamq.utils.entity.TComment" >
+    insert into t_comment (uid, user_uid, to_uid, 
+      to_user_uid, content, blog_uid, 
+      status, create_time, update_time, 
+      source, TYPE, first_comment_uid, 
+      is_del)
+    values (#{uid,jdbcType=VARCHAR}, #{userUid,jdbcType=VARCHAR}, #{toUid,jdbcType=VARCHAR}, 
+      #{toUserUid,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{blogUid,jdbcType=VARCHAR}, 
+      #{status,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{source,jdbcType=VARCHAR}, #{type,jdbcType=BIT}, #{firstCommentUid,jdbcType=VARCHAR}, 
+      #{isDel,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bgamq.utils.entity.TComment" >
+    insert into t_comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="userUid != null" >
+        user_uid,
+      </if>
+      <if test="toUid != null" >
+        to_uid,
+      </if>
+      <if test="toUserUid != null" >
+        to_user_uid,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="blogUid != null" >
+        blog_uid,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="firstCommentUid != null" >
+        first_comment_uid,
+      </if>
+      <if test="isDel != null" >
+        is_del,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="userUid != null" >
+        #{userUid,jdbcType=VARCHAR},
+      </if>
+      <if test="toUid != null" >
+        #{toUid,jdbcType=VARCHAR},
+      </if>
+      <if test="toUserUid != null" >
+        #{toUserUid,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="blogUid != null" >
+        #{blogUid,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=BIT},
+      </if>
+      <if test="firstCommentUid != null" >
+        #{firstCommentUid,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null" >
+        #{isDel,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bgamq.utils.entity.TCommentExample" resultType="java.lang.Integer" >
+    select count(*) from t_comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_comment
+    <set >
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userUid != null" >
+        user_uid = #{record.userUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.toUid != null" >
+        to_uid = #{record.toUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.toUserUid != null" >
+        to_user_uid = #{record.toUserUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.blogUid != null" >
+        blog_uid = #{record.blogUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=BIT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.source != null" >
+        source = #{record.source,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        TYPE = #{record.type,jdbcType=BIT},
+      </if>
+      <if test="record.firstCommentUid != null" >
+        first_comment_uid = #{record.firstCommentUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDel != null" >
+        is_del = #{record.isDel,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_comment
+    set uid = #{record.uid,jdbcType=VARCHAR},
+      user_uid = #{record.userUid,jdbcType=VARCHAR},
+      to_uid = #{record.toUid,jdbcType=VARCHAR},
+      to_user_uid = #{record.toUserUid,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=VARCHAR},
+      blog_uid = #{record.blogUid,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=BIT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      source = #{record.source,jdbcType=VARCHAR},
+      TYPE = #{record.type,jdbcType=BIT},
+      first_comment_uid = #{record.firstCommentUid,jdbcType=VARCHAR},
+      is_del = #{record.isDel,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bgamq.utils.entity.TComment" >
+    update t_comment
+    <set >
+      <if test="userUid != null" >
+        user_uid = #{userUid,jdbcType=VARCHAR},
+      </if>
+      <if test="toUid != null" >
+        to_uid = #{toUid,jdbcType=VARCHAR},
+      </if>
+      <if test="toUserUid != null" >
+        to_user_uid = #{toUserUid,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="blogUid != null" >
+        blog_uid = #{blogUid,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="source != null" >
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=BIT},
+      </if>
+      <if test="firstCommentUid != null" >
+        first_comment_uid = #{firstCommentUid,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null" >
+        is_del = #{isDel,jdbcType=BIT},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bgamq.utils.entity.TComment" >
+    update t_comment
+    set user_uid = #{userUid,jdbcType=VARCHAR},
+      to_uid = #{toUid,jdbcType=VARCHAR},
+      to_user_uid = #{toUserUid,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      blog_uid = #{blogUid,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      source = #{source,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=BIT},
+      first_comment_uid = #{firstCommentUid,jdbcType=VARCHAR},
+      is_del = #{isDel,jdbcType=BIT}
+    where uid = #{uid,jdbcType=VARCHAR}
+  </update>
+</mapper>
