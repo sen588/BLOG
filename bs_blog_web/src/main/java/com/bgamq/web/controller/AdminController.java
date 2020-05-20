@@ -9,7 +9,7 @@ public class AdminController {
 
     @RequestMapping(value = "/get")
     public String admin() {
-        return "sso";
+        return "web";
     }
 
 }
