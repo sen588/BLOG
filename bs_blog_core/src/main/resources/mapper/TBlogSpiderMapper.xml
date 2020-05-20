@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bgamq.core.mapper.TBlogSpiderMapper" >
+  <resultMap id="BaseResultMap" type="com.bgamq.core.entity.TBlogSpider" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="summary" property="summary" jdbcType="VARCHAR" />
+    <result column="tag_uid" property="tagUid" jdbcType="VARCHAR" />
+    <result column="click_count" property="clickCount" jdbcType="INTEGER" />
+    <result column="collect_count" property="collectCount" jdbcType="INTEGER" />
+    <result column="file_uid" property="fileUid" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="admin_uid" property="adminUid" jdbcType="VARCHAR" />
+    <result column="is_original" property="isOriginal" jdbcType="VARCHAR" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="articles_part" property="articlesPart" jdbcType="VARCHAR" />
+    <result column="blog_sort_uid" property="blogSortUid" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="TINYINT" />
+    <result column="is_publish" property="isPublish" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="is_del" property="isDel" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.bgamq.core.entity.TBlogSpider" extends="BaseResultMap" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    uid, title, summary, tag_uid, click_count, collect_count, file_uid, status, create_time, 
+    update_time, admin_uid, is_original, author, articles_part, blog_sort_uid, level, 
+    is_publish, sort, is_del
+  </sql>
+  <sql id="Blob_Column_List" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.bgamq.core.entity.TBlogSpiderExample" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_blog_spider
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bgamq.core.entity.TBlogSpiderExample" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_blog_spider
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.bgamq.core.entity.TBlogSpiderExample" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    delete from t_blog_spider
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.bgamq.core.entity.TBlogSpiderExample" resultType="java.lang.Integer" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select count(*) from t_blog_spider
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update t_blog_spider
+    <set >
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.summary != null" >
+        summary = #{record.summary,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tagUid != null" >
+        tag_uid = #{record.tagUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clickCount != null" >
+        click_count = #{record.clickCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.collectCount != null" >
+        collect_count = #{record.collectCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.fileUid != null" >
+        file_uid = #{record.fileUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.adminUid != null" >
+        admin_uid = #{record.adminUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isOriginal != null" >
+        is_original = #{record.isOriginal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.author != null" >
+        author = #{record.author,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articlesPart != null" >
+        articles_part = #{record.articlesPart,jdbcType=VARCHAR},
+      </if>
+      <if test="record.blogSortUid != null" >
+        blog_sort_uid = #{record.blogSortUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level != null" >
+        level = #{record.level,jdbcType=TINYINT},
+      </if>
+      <if test="record.isPublish != null" >
+        is_publish = #{record.isPublish,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.isDel != null" >
+        is_del = #{record.isDel,jdbcType=TINYINT},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update t_blog_spider
+    set uid = #{record.uid,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      summary = #{record.summary,jdbcType=VARCHAR},
+      tag_uid = #{record.tagUid,jdbcType=VARCHAR},
+      click_count = #{record.clickCount,jdbcType=INTEGER},
+      collect_count = #{record.collectCount,jdbcType=INTEGER},
+      file_uid = #{record.fileUid,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=TINYINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      admin_uid = #{record.adminUid,jdbcType=VARCHAR},
+      is_original = #{record.isOriginal,jdbcType=VARCHAR},
+      author = #{record.author,jdbcType=VARCHAR},
+      articles_part = #{record.articlesPart,jdbcType=VARCHAR},
+      blog_sort_uid = #{record.blogSortUid,jdbcType=VARCHAR},
+      level = #{record.level,jdbcType=TINYINT},
+      is_publish = #{record.isPublish,jdbcType=VARCHAR},
+      sort = #{record.sort,jdbcType=INTEGER},
+      is_del = #{record.isDel,jdbcType=TINYINT},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update t_blog_spider
+    set uid = #{record.uid,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      summary = #{record.summary,jdbcType=VARCHAR},
+      tag_uid = #{record.tagUid,jdbcType=VARCHAR},
+      click_count = #{record.clickCount,jdbcType=INTEGER},
+      collect_count = #{record.collectCount,jdbcType=INTEGER},
+      file_uid = #{record.fileUid,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=TINYINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      admin_uid = #{record.adminUid,jdbcType=VARCHAR},
+      is_original = #{record.isOriginal,jdbcType=VARCHAR},
+      author = #{record.author,jdbcType=VARCHAR},
+      articles_part = #{record.articlesPart,jdbcType=VARCHAR},
+      blog_sort_uid = #{record.blogSortUid,jdbcType=VARCHAR},
+      level = #{record.level,jdbcType=TINYINT},
+      is_publish = #{record.isPublish,jdbcType=VARCHAR},
+      sort = #{record.sort,jdbcType=INTEGER},
+      is_del = #{record.isDel,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
