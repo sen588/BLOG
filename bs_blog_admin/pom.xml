@@ -11,6 +11,7 @@
     <groupId>com.bgamq</groupId>
     <artifactId>bs_blog_admin</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
     <name>bs_blog_admin</name>
     <description>后台admin服务</description>
 
