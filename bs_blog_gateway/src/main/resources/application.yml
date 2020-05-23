@@ -1,3 +1,20 @@
 server:
   port: 88
 
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: bs_blog_sso
+          uri: lb://bs-blog-sso
+          predicates:
+            - Path=/sso/**
+#          filters:
+#            - RewritePath=/api/(?<segment>.*), /$\{segment}
+
+        - id: bs_blog_core
+          uri: lb://bs-blog-core
+          predicates:
+            - Path=/oms/**
+
