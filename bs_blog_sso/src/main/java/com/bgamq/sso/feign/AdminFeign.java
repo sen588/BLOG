@@ -1,9 +1,14 @@
 package com.bgamq.sso.feign;
 
+import com.bgamq.core.bean.Resp;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.GetMapping;
 
-@Component
-@FeignClient(name = "bs_blog_core")
+import java.util.Map;
+
+@FeignClient(name = "bs-blog-core")
 public interface AdminFeign {
+
+    @GetMapping("/login")
+    Resp<Map<String, Boolean>> login();
 }

@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -22,13 +23,13 @@ public class LoginController {
     AdminFeign adminFeign;
 
     @GetMapping("/login")
-    public Resp<Object> login(@RequestParam(value = "redirect_url", required = false) String redirectUrl,
+    public String login(@RequestParam(value = "redirect_url", required = false) String redirectUrl,
                               Model model) {
-        /*Resp<Map<String, Boolean>> login = adminFeign.login();
+        Resp<Map<String, Boolean>> login = adminFeign.login();
         Map<String, Boolean> data = login.getData();
-        System.out.println(data);*/
+        System.out.println(data);
         model.addAttribute("redirectUrl", redirectUrl);
-        return Resp.ok(null);
+        return null;
     }
 
     @PostMapping("/doLogin")
