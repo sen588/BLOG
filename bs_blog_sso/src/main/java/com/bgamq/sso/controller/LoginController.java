@@ -18,6 +18,10 @@ import java.util.UUID;
 @RestController
 public class LoginController {
 
+    @GetMapping("/get")
+    public String get() {
+        return "get";
+    }
 
     @Autowired
     AdminFeign adminFeign;
