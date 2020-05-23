@@ -5,11 +5,15 @@ server:
 spring:
   cloud:
     gateway:
+      discovery:
+        locator:
+          enabled: true  #开启通过注册中的服务名来访问
       routes:
         - id: bs_blog_sso
           uri: lb://bs-blog-sso
           predicates:
             - Path=/sso/**
+
 #          filters:
 #            - RewritePath=/api/(?<segment>.*), /$\{segment}
 
