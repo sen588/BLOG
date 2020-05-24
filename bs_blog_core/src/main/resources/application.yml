@@ -4,6 +4,6 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/bgm_20200512?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://127.0.0.1:3306/db2020?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
-    password: root
+    password: 123456
