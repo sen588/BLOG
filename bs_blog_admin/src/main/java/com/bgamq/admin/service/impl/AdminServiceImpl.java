@@ -1,26 +1,19 @@
 package com.bgamq.admin.service.impl;
 
-import com.bgamq.admin.service.AdminService;
-import com.bgamq.core.bean.PageVo;
-import com.bgamq.core.bean.QueryCondition;
+import com.bgamq.admin.mapper.TAdminMapper;
 import com.bgamq.core.entity.TAdmin;
 import com.bgamq.core.entity.TAdminExample;
-import com.bgamq.core.mapper.TAdminMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.bgamq.admin.service.AdminService;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service("adminService")
 public class AdminServiceImpl implements AdminService {
 
-    @Autowired
+    @Resource
     private TAdminMapper adminMapper;
-
-    @Override
-    public PageVo queryPage(QueryCondition queryCondition) {
-        return null;
-    }
 
     @Override
     public TAdmin getById(Long id) {

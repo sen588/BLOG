@@ -8,7 +8,6 @@
 
 package com.bgamq.core.bean;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
@@ -63,13 +62,13 @@ public class PageVo implements Serializable {
 	/**
 	 * 分页
 	 */
-	public PageVo(IPage<?> page) {
+	/*public PageVo(IPage<?> page) {
 		this.list = page.getRecords();
 		this.totalCount = (Long)page.getTotal();
 		this.pageSize = (Long)page.getSize();
 		this.currPage = (Long)page.getCurrent();
 		this.totalPage = (Long)page.getPages();
-	}
+	}*/
 
 
 

@@ -1,6 +1,7 @@
 package com.bgamq.sso.controller;
 
 import com.bgamq.core.bean.Resp;
+import com.bgamq.core.entity.TAdmin;
 import com.bgamq.sso.feign.AdminFeign;
 import com.bgamq.sso.utils.GuliJwtUtils;
 import io.jsonwebtoken.impl.DefaultClaims;
@@ -29,8 +30,7 @@ public class LoginController {
     @GetMapping("/login")
     public String login(@RequestParam(value = "redirect_url", required = false) String redirectUrl,
                               Model model) {
-        Resp<Map<String, Boolean>> login = adminFeign.login();
-        Map<String, Boolean> data = login.getData();
+        Resp<TAdmin> data = adminFeign.info(Long.valueOf(8080));
         System.out.println(data);
         model.addAttribute("redirectUrl", redirectUrl);
         return null;
