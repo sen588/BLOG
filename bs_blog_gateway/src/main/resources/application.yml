@@ -9,21 +9,26 @@ spring:
         locator:
           enabled: true  #开启通过注册中的服务名来访问
       routes:
-        #单点登录系统
-        - id: bs_blog_sso
-          uri: lb://bs-blog-sso
-          predicates:
-            - Path=/sso/**
-
         #后台系统
         - id: bs_blog_admin
           uri: lb://bs-blog-admin
           predicates:
             - Path=/admin/**
 
-        #前台系统
-        - id: bs_blog_web
-          uri: lb://bs-blog-web
+        #主模块
+        - id: bs_blog_subject
+          uri: lb://bs-blog-subject
           predicates:
-            - Path=/web/**
+            - Path=/subject/**
 
+        #附件模块
+        - id: bs_blog_annex
+          uri: lb://bs-blog-annex
+          predicates:
+            - Path=/annex/**
+
+        #搜索模块
+        - id: bs_blog_engine
+          uri: lb://bs-blog-engine
+          predicates:
+            - Path=/engine/**

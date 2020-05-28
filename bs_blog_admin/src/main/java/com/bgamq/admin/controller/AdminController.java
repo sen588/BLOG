@@ -5,9 +5,9 @@ import com.bgamq.core.bean.Resp;
 import com.bgamq.core.entity.TAdmin;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.Arrays;
 
 
@@ -16,7 +16,7 @@ import java.util.Arrays;
 @RequestMapping(value = "/admin")
 public class AdminController {
 
-    @Autowired
+    @Resource
     private AdminService adminService;
 
     /**

@@ -1,4 +1,4 @@
-package com.bgamq.web.config;
+package com.bgamq.subject.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,9 +7,9 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class WebInterceptorConfig implements HandlerInterceptor {
+public class SubjectInterceptorConfig implements HandlerInterceptor {
 
-    private static final Logger log = LoggerFactory.getLogger(WebInterceptorConfig.class);
+    private static final Logger log = LoggerFactory.getLogger(SubjectInterceptorConfig.class);
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse response, Object o) throws Exception {

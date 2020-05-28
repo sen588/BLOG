@@ -1,11 +1,11 @@
-package com.bgamq.core.config;
+package com.bgamq.subject.config;
+
 
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableDiscoveryClient
-public class CoreCloudConfig {
-
+public class SubjectCloudConfig {
 
 }

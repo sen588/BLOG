@@ -1,4 +1,4 @@
-package com.bgamq.web.config;
+package com.bgamq.subject.config;
 
 
 import io.swagger.annotations.Api;
@@ -15,7 +15,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableSwagger2
 @Configuration
-public class WebSwaggerConfig {
+public class SubjectSwaggerConfig {
 
     /**
      * swagger访问地址
