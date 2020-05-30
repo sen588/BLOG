@@ -2,6 +2,7 @@ package com.bgamq.sso.config;
 
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -19,7 +20,7 @@ public class SsoSwaggerConfig {
 
     /**
      * swagger访问地址
-     * http://127.0.0.1:89/sso/swagger-ui.html
+     * http://127.0.0.1:90/swagger-ui.html
      * @return
      */
 

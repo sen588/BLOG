@@ -15,7 +15,7 @@ spring:
           predicates:
             - Path=/admin/**
 
-        #主模块
+        #服务模块
         - id: bs_blog_subject
           uri: lb://bs-blog-subject
           predicates:

@@ -1,9 +1,6 @@
 package com.bgamq.sso.utils;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.impl.crypto.MacProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.codec.binary.Base64;
@@ -14,7 +11,13 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
 import java.util.Date;
+import java.util.Map;
 import java.util.UUID;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+
 
 /**
  * JWT校验工具类
@@ -29,7 +32,7 @@ import java.util.UUID;
  * </ol>
  */
 @Slf4j
-public class JwtUtils {
+public class JwtUtil {
     /**
      * JWT 加解密类型
      */
@@ -37,13 +40,15 @@ public class JwtUtils {
     /**
      * JWT 生成密钥使用的密码
      */
-    public static final String JWT_RULE = "atguiguhelloheihei";
+    public static final String JWT_RULE = "bs*blog:sso^login@user";
 
     /**
      * JWT 添加至HTTP HEAD中的前缀
      */
     private static final String JWT_SEPARATOR = "Bearer ";
 
+
+    private static String key = "DSJAKLDJALJ_ATGUIGU";
     /**
      * 使用JWT默认方式，生成加解密密钥
      *
@@ -206,5 +211,48 @@ public class JwtUtils {
      */
     public static Boolean checkJWT(String claimsJws, String sub) {
         return checkJWT(generateKey(JWT_ALG, JWT_RULE), claimsJws, sub);
+    }
+
+    /**
+     *
+     * @param payload  自定义的负载内容
+     * @param claims   jwt默认支持的属性
+     * @return
+     */
+    public static String buildJwt(Map<String,Object> payload, Claims claims){
+
+        JwtBuilder builder = Jwts.builder()
+                .signWith(SignatureAlgorithm.HS256, JwtUtil.key)
+                .setClaims(payload);//设置自定义的负载
+
+        if(claims!=null){
+            if(claims.getId()!=null){
+                builder.setId(claims.getId());
+            }
+            if(claims.getAudience()!=null){
+                builder.setAudience(claims.getAudience());
+            }
+            if(claims.getExpiration()!=null){
+                builder.setExpiration(claims.getExpiration());
+            }
+            if (claims.getNotBefore()!=null){
+                builder.setNotBefore(claims.getNotBefore());
+            }
+            //xxxxx
+        }
+
+        String compact = builder.compact();
+        return compact;
+    }
+
+    public static void checkJwt(String jwt){
+
+        Jwts.parser().setSigningKey(key).parse(jwt);
+
+
+    }
+
+    public static Map<String,Object> getJwtBody(String jwt){
+        return Jwts.parser().setSigningKey(key).parseClaimsJws(jwt).getBody();
     }
 }

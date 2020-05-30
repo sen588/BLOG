@@ -19,7 +19,7 @@ public class SubjectSwaggerConfig {
 
     /**
      * swagger访问地址
-     * http://127.0.0.1:8090/web/swagger-ui.html
+     * http://127.0.0.1:8090/subject/swagger-ui.html
      * @return
      */
 
