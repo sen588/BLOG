@@ -1,6 +1,5 @@
 package com.bgamq.sso.controller;
 
-import ch.qos.logback.core.util.ContextUtil;
 import com.bgamq.sso.bean.UserSign;
 import com.bgamq.sso.utils.ConstantUtil;
 import com.bgamq.sso.bean.Resp;
