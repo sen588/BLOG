@@ -1,15 +1,15 @@
 #!/bin/sh
-application_source="github地址"
+application_source="https://github.com/sen588/BLOG.git"
 
 ## chang here
-SERVICE_DIR=/var/www/ctoedu
-SERVICE_NAME=blog-api-boot-jpa-data-0.0.1-SNAPSHOT
+SERVICE_DIR_TAG=/opt/applications/blog
 SPRING_PROFILES_ACTIVE=dev
 
 ## java env
 export JAVA_HOME=/opt/jdk1.8
 export JRE_HOME=${JAVA_HOME}/jre
 start(){
+        SERVICE_NAME=${1:-test};
 		procedure=`ps -ef | grep -w "${SERVICE_NAME}" |grep -w "java"| grep -v "grep" | awk '{print $2}'`
 		if [ "${procedure}" = "" ];
 		then
@@ -19,7 +19,7 @@ start(){
 				SPRING_PROFILES_ACTIVE=$2
 			fi
 			echo "spring.profiles.active=${SPRING_PROFILES_ACTIVE}"
-			exec nohup ${JRE_HOME}/bin/java -Xms128m -Xmx512m -jar ${SERVICE_DIR}/${SERVICE_NAME}\.jar --spring.profiles.active=${SPRING_PROFILES_ACTIVE} >/dev/null 2>&1 &
+			exec nohup ${JRE_HOME}/bin/java -Xms128m -Xmx512m -jar ${SERVICE_DIR_TAG}/${SERVICE_NAME}\.jar --spring.profiles.active=${SPRING_PROFILES_ACTIVE} >/dev/null 2>&1 &
 			echo "start success"
 		else
 			echo "${SERVICE_NAME} is start"
@@ -27,6 +27,7 @@ start(){
 }
 
 stop(){
+	    SERVICE_NAME=${1:-test};
 		procedure=`ps -ef | grep -w "${SERVICE_NAME}" |grep -w "java"| grep -v "grep" | awk '{print $2}'`
 		if [ "${procedure}" = "" ];
 		then
@@ -62,15 +63,54 @@ package(){
 	mvn clean package assembly:assembly -P$profile
 }
 
-
 case "$1" in
 
+	start)
+		start $args
+	;;
+
+	stop)
+		stop  $args
+	;;
+
 	restart)
-		$0 stop
-		sleep 1
-		$0 start $2
+		stop  $args
+		sleep 1m
+		start $args
 	;;
+
+	package)
+        package $args
+    ;;
+
+
+    deploy)
+        stop    $1
+        package $1 $2
+
+        cd      $SERVICE_DIR_TAG
+        start   $1
+    ;;
+
+    batch)
+        i=2
+        while [ ! -d "$i" ]
+        do
+            stop    $1
+            package $1 $i
+
+            cd      $SERVICE_DIR_TAG
+            start   $1
+            i++
+        done
+    ;;
+
 	*)
-		echo "usage: $0 [start|stop|restart] [dev|test|prod]"
-	;;
+		echo "start---->启动服务------>命令格式:[start profile]"
+        echo "stop----->停止服务------>命令格式:[stop profile]"
+        echo "restart-->重启服务------>命令格式:[restart profile]"
+        echo "package-->更新打包------>命令格式:[package profile tag]---------->创建安装包:[`pwd`/target/$application_name.tar.gz]"
+        echo "install-->安装服务------>命令格式:[install]-------------->安装至:[$SERVICE_DIR_TAG]"
+        echo "deploy--->安装重启------>命令格式:[deploy profile tag]--->如果tag为空,那么使用trunk下源码打包启动"
+    ;;
 esac

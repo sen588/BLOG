@@ -11,6 +11,7 @@
     <groupId>com.bgamq</groupId>
     <artifactId>bs_blog_subject</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
     <name>bs_blog_subject</name>
     <description>帖子详情、评论信息、标签、热搜等功能</description>
 
@@ -27,6 +28,8 @@
     </dependencies>
 
     <build>
+        <!-- package名称，版本号 -->
+        <finalName>subject-1.0.0</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
