@@ -54,6 +54,14 @@
             <version>${mybatis.version}</version>
         </dependency>
 
+        <!--druid数据库连接池-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.1.10</version>
+        </dependency>
+
+
         <!-- 逆向工程 -->
         <dependency>
             <groupId>org.mybatis.generator</groupId>
