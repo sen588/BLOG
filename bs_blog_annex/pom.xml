@@ -29,6 +29,8 @@
     </dependencies>
 
     <build>
+        <!-- package名称，版本号 -->
+        <finalName>annex-1.0.0</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
