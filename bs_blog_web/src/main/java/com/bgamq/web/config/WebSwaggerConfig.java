@@ -1,4 +1,4 @@
-package com.bgamq.subject.config;
+package com.bgamq.web.config;
 
 
 import io.swagger.annotations.Api;
@@ -15,21 +15,21 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableSwagger2
 @Configuration
-public class SubjectSwaggerConfig {
+public class WebSwaggerConfig {
 
     /**
      * swagger访问地址
-     * http://127.0.0.1:8090/subject/swagger-ui.html
+     * http://127.0.0.1:8090/swagger-ui.html
      * @return
      */
 
-    @Bean("前端用户系统")
+    @Bean("前台页面系统")
     public Docket userApis() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("前端用户系统")
+                .groupName("前台页面系统")
                 .select()
                 .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
-                .paths(PathSelectors.regex("/subject.*"))
+                .paths(PathSelectors.regex("/web.*"))
                 .build()
                 .apiInfo(apiInfo())
                 .enable(true);
@@ -37,8 +37,8 @@ public class SubjectSwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("BS博客-前端用户系统接口文档")
-                .description("提供前端用户系统的文档")
+                .title("BS博客-前台页面接口文档")
+                .description("提供前台页面的文档")
                 .termsOfServiceUrl("http://www.bgamq.com/")
                 .version("1.0")
                 .build();
