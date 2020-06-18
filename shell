@@ -63,12 +63,6 @@ package(){
 	mvn clean package assembly:assembly -P$profile
 }
 
-batch() {
-
-
-}
-
-
 case "$1" in
 
 	start)
