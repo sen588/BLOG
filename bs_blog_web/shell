@@ -2,7 +2,7 @@
 application_source="https://github.com/sen588/BLOG.git"
 
 ## chang here
-SERVICE_DIR_TAG=/opt/applications/blog
+SERVICE_DIR_TAG=/opt/applications/blog/bs_blog_web
 SPRING_PROFILES_ACTIVE=dev
 
 ## java env
