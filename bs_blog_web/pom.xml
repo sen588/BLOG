@@ -46,7 +46,7 @@
 
     <build>
         <!-- package名称，版本号 -->
-        <finalName>web-1.0.0</finalName>
+        <finalName>web</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

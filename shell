@@ -55,13 +55,14 @@ package(){
     cd ${SERVICE_DIR_TAG}/${tag}/bs_blog_${bs}
     mvn clean package
     cd ${SERVICE_DIR_TAG}
-    rm -rf ${bs}-${tag}.jar
-    mv ${SERVICE_DIR_TAG}/${tag}/bs_blog_${bs}/target/${bs}-${tag}.jar ${SERVICE_DIR_TAG}
+    rm -rf ${bs}.jar
+    mv ${SERVICE_DIR_TAG}/${tag}/bs_blog_${bs}/target/${bs}.jar ${SERVICE_DIR_TAG}
 }
 
-rm() {
-    tag=${2}
-    rm -rf ${SERVICE_DIR_TAG}/${tag}
+rm(){
+    tag1=${1}
+    tag2=${2}
+    echo "${tag1}-${tag2}"
 }
 
 case "$1" in
