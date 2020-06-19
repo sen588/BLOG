@@ -51,15 +51,16 @@ package(){
 	tag=${2}
 	bs=${3}
 
-    rm -rf ${SERVICE_DIR_TAG}/${tag}
-    rm -rf ${SERVICE_DIR_TAG}/${tag}/README.md
-    rm -rf ${SERVICE_DIR_TAG}/${tag}/shell
     git clone --branch ${tag} ${application_source} ${SERVICE_DIR_TAG}/${tag}
     cd ${SERVICE_DIR_TAG}/${tag}/bs_blog_${bs}
     mvn clean package
     cd ${SERVICE_DIR_TAG}
     rm -rf ${bs}-${tag}.jar
     mv ${SERVICE_DIR_TAG}/${tag}/bs_blog_${bs}/target/${bs}-${tag}.jar ${SERVICE_DIR_TAG}
+}
+
+rm() {
+    tag=${1}
     rm -rf ${SERVICE_DIR_TAG}/${tag}
 }
 
@@ -93,16 +94,14 @@ case "$1" in
     ;;
 
     batch)
+        rm $2
         i=2
         while [ ! -d "$i" ]
         do
-            stop    $1
-            package $1 $i
-
-            cd      $SERVICE_DIR_TAG
-            start   $1
+            package $1 $2 $i
             i++
         done
+        rm $2
     ;;
 
 	*)
