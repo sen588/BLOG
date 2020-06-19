@@ -6,7 +6,7 @@ SERVICE_DIR_TAG=/opt/applications/blog
 SPRING_PROFILES_ACTIVE=dev
 
 ## java env
-export JAVA_HOME=/opt/jdk1.8
+export JAVA_HOME=/usr/java/jdk1.8.0_251
 export JRE_HOME=${JAVA_HOME}/jre
 start(){
         SERVICE_NAME=${1:-test};
@@ -47,9 +47,8 @@ stop(){
 }
 
 package(){
-    profile=${1:-demo}
-	tag=${2:-trunk}
-	bs=${3:-server}
+	tag=${1:-trunk}
+	bs=${2:-server}
 
     git clone --branch ${tag} ${application_source} ${SERVICE_DIR_TAG}/${tag}
     cd ${SERVICE_DIR_TAG}/${tag}/bs_blog_${bs}
@@ -75,7 +74,7 @@ case "$1" in
 	;;
 
 	package)
-        package $1 $2 $3
+        package $1 $2
     ;;
 
 
