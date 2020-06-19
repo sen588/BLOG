@@ -27,7 +27,7 @@ start(){
 }
 
 stop(){
-	    SERVICE_NAME=${1:-test};
+	    SERVICE_NAME=${1};
 		procedure=`ps -ef | grep -w "${SERVICE_NAME}" |grep -w "java"| grep -v "grep" | awk '{print $2}'`
 		if [ "${procedure}" = "" ];
 		then
@@ -51,13 +51,16 @@ package(){
 	tag=${2}
 	bs=${3}
 
-    git clone --branch ${tag} ${application_source} ${SERVICE_DIR_TAG}
-    cd ${SERVICE_DIR_TAG}/bs_blog_${bs}
+    rm -rf ${SERVICE_DIR_TAG}/${tag}
+    rm -rf ${SERVICE_DIR_TAG}/${tag}/README.md
+    rm -rf ${SERVICE_DIR_TAG}/${tag}/shell
+    git clone --branch ${tag} ${application_source} ${SERVICE_DIR_TAG}/${tag}
+    cd ${SERVICE_DIR_TAG}/${tag}/bs_blog_${bs}
     mvn clean package
     cd ${SERVICE_DIR_TAG}
     rm -rf ${bs}-${tag}.jar
-    mv ${SERVICE_DIR_TAG}/bs_blog_${bs}/target/${bs}-${tag}.jar ${SERVICE_DIR_TAG}
-    rm -rf bs_blog_${bs}
+    mv ${SERVICE_DIR_TAG}/${tag}/bs_blog_${bs}/target/${bs}-${tag}.jar ${SERVICE_DIR_TAG}
+    rm -rf ${SERVICE_DIR_TAG}/${tag}
 }
 
 case "$1" in
@@ -67,7 +70,7 @@ case "$1" in
 	;;
 
 	stop)
-		stop  $args
+		stop  $1
 	;;
 
 	restart)
@@ -85,7 +88,7 @@ case "$1" in
         stop    $1
         package $1 $2
 
-        cd      $SERVICE_DIR_TAG
+        cd      ${SERVICE_DIR_TAG}
         start   $1
     ;;
 
