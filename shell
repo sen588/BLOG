@@ -51,7 +51,7 @@ package(){
 	tag=${2}
 	bs=${3}
 
-    git clone --branch ${tag} ${application_source} ${SERVICE_DIR_TAG}
+    git clone --branch ${tag} ${application_source} ${SERVICE_DIR_TAG}/${tag}
     cd ${SERVICE_DIR_TAG}/${tag}/bs_blog_${bs}
     mvn clean package
     cd ${SERVICE_DIR_TAG}
