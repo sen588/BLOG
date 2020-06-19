@@ -55,7 +55,9 @@ package(){
     cd ${SERVICE_DIR_TAG}/bs_blog_${bs}
     mvn clean package
     cd ${SERVICE_DIR_TAG}
-    cp -a ${SERVICE_DIR_TAG}/bs_blog_${bs}/target/${bs}-${tag}.jar
+    rm -rf ${bs}-${tag}.jar
+    mv ${SERVICE_DIR_TAG}/bs_blog_${bs}/target/${bs}-${tag}.jar ${SERVICE_DIR_TAG}
+    rm -rf bs_blog_${bs}
 }
 
 case "$1" in
