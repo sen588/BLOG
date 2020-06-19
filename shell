@@ -81,7 +81,9 @@ case "$1" in
 	;;
 
 	package)
+	    rm      $2
         package $1 $2 $3
+        rm      $2
     ;;
 
 
