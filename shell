@@ -47,14 +47,15 @@ stop(){
 }
 
 package(){
-	tag=${1:-trunk}
-	bs=${2:-server}
+    profile=${1:-dev}
+	tag=${2:-trunk}
+	bs=${3:-server}
 
     git clone --branch ${tag} ${application_source} ${SERVICE_DIR_TAG}/${tag}
-    cd ${SERVICE_DIR_TAG}/${tag}/bs_blog_${bs}
+    cd ${SERVICE_DIR_TAG}/bs_blog_${bs}
     mvn clean package
-    cd ${SERVICE_DIR_TAG}/${tag}
-    cp -a ${SERVICE_DIR_TAG}/${tag}/bs_blog_${bs}/target/${bs}-${tag}.jar
+    cd ${SERVICE_DIR_TAG}
+    cp -a ${SERVICE_DIR_TAG}/bs_blog_${bs}/target/${bs}-${tag}.jar
 }
 
 case "$1" in
@@ -74,7 +75,7 @@ case "$1" in
 	;;
 
 	package)
-        package $1 $2
+        package $args $1 $2
     ;;
 
 
