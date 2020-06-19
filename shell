@@ -51,7 +51,7 @@ package(){
 	tag=${2}
 	bs=${3}
 
-    git clone --branch ${tag} ${application_source} ${SERVICE_DIR_TAG}/${tag}
+    git clone --branch ${tag} ${application_source} ${SERVICE_DIR_TAG}
     cd ${SERVICE_DIR_TAG}/${tag}/bs_blog_${bs}
     mvn clean package
     cd ${SERVICE_DIR_TAG}
@@ -60,9 +60,8 @@ package(){
 }
 
 rm(){
-    tag1=${1}
-    tag2=${2}
-    echo "${tag1}-${tag2}"
+    tag=${1}
+    rm -rf ${SERVICE_DIR_TAG}/${tag}
 }
 
 case "$1" in
