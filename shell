@@ -60,7 +60,7 @@ package(){
 }
 
 rm() {
-    tag=${1}
+    tag=${2}
     rm -rf ${SERVICE_DIR_TAG}/${tag}
 }
 
