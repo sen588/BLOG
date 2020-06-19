@@ -49,18 +49,14 @@ stop(){
 package(){
     profile=${1:-demo}
 	tag=${2:-trunk}
+	bs=${3:-server}
 
-	case $tag in
-		trunk)
-			svn sw $application_source/trunk/server .
-		;;
-		*)
-			svn sw $application_source/tags/$tag/server .
-		;;
-	esac
-
-	svn info > svn.info
-	mvn clean package assembly:assembly -P$profile
+    git clone --branch ${tag} ${application_source} ${SERVICE_DIR_TAG}/${tag}
+    cd ${SERVICE_DIR_TAG}/${tag}/bs_blog_${bs}
+    mvn clean package
+    cd ${SERVICE_DIR_TAG}/${tag}
+    cp -a ${SERVICE_DIR_TAG}/${tag}/bs_blog_${bs}/target/${bs}-${tag}.jar
+    rm -rf bs_blog_${bs}
 }
 
 case "$1" in
@@ -80,7 +76,7 @@ case "$1" in
 	;;
 
 	package)
-        package $args
+        package $1 $2 $3
     ;;
 
 
