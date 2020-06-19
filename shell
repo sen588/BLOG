@@ -59,10 +59,7 @@ package(){
     mv ${SERVICE_DIR_TAG}/${tag}/bs_blog_${bs}/target/${bs}.jar ${SERVICE_DIR_TAG}
 }
 
-rm(){
-    tag=${1}
-    rm -rf ${SERVICE_DIR_TAG}/${tag}
-}
+
 
 case "$1" in
 
@@ -81,9 +78,7 @@ case "$1" in
 	;;
 
 	package)
-	    rm      $2
         package $1 $2 $3
-        rm      $2
     ;;
 
 
@@ -96,14 +91,12 @@ case "$1" in
     ;;
 
     batch)
-        rm $2
         i=2
         while [ ! -d "$i" ]
         do
             package $1 $2 $i
             i++
         done
-        rm $2
     ;;
 
 	*)
