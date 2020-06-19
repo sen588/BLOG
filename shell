@@ -47,9 +47,9 @@ stop(){
 }
 
 package(){
-    profile=${1:-dev}
-	tag=${2:-trunk}
-	bs=${3:-server}
+    profile=${1}
+	tag=${2}
+	bs=${3}
 
     git clone --branch ${tag} ${application_source} ${SERVICE_DIR_TAG}
     cd ${SERVICE_DIR_TAG}/bs_blog_${bs}
@@ -75,7 +75,7 @@ case "$1" in
 	;;
 
 	package)
-        package $args $1 $2
+        package $1 $2 $3
     ;;
 
 
