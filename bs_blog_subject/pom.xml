@@ -29,7 +29,7 @@
 
     <build>
         <!-- package名称，版本号 -->
-        <finalName>subject-1.0.1</finalName>
+        <finalName>subject-1.0.0</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
