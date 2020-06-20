@@ -95,13 +95,13 @@ case "$1" in
 
     batch)
         remover $args
+        a=0
         for i in $@
         do
-           echo i
-           if (( i>2 )); then
+           ((a++))
+           echo $a
+           if (( a>2 )); then
                package $1 $2 $i
-           else
-               i++
            fi
         done
         remover $args
