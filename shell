@@ -14,7 +14,7 @@ start(){
 		if [ "${procedure}" = "" ];
 		then
 			echo "start ..."
-			nohup java -jar ${SERVICE_NAME}.jar &
+			nohup java -jar ${SERVICE_DIR_TAG}/${SERVICE_NAME}.jar &
 			echo "start success"
 		else
 			echo "${SERVICE_NAME} is start"
