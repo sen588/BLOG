@@ -59,7 +59,7 @@ package(){
 
 }
 
-rm(){
+remover(){
     rm -rf ${SERVICE_DIR_TAG}/tag
 }
 
@@ -80,9 +80,9 @@ case "$1" in
 	;;
 
 	package)
-	    rm
+	    remover $args
         package $1 $2 $3
-        rm
+        remover $args
     ;;
 
     deploy)
@@ -94,14 +94,14 @@ case "$1" in
     ;;
 
     batch)
-        rm
+        remover $args
         i=3
         while [ ! -d "$i" ]
         do
             package $1 $2 $i
             i++
         done
-        rm
+        remover $args
     ;;
 
 	*)
