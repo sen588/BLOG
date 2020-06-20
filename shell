@@ -96,10 +96,10 @@ case "$1" in
     batch)
         remover $args
         i=3
-        while [ ! -d "$i" ]
+        for i in $@
         do
-            package $1 $2 $i
-            i++
+           package $1 $2 $i
+           i++
         done
         remover $args
     ;;
