@@ -1,5 +1,5 @@
 #!/bin/sh
-application_source="https://github.com/sen588/BLOG/tree"
+application_source="https://github.com/sen588/BLOG.git"
 
 ## chang here
 SERVICE_DIR_TAG=/opt/project/jar
