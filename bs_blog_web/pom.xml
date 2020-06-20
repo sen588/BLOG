@@ -16,7 +16,7 @@
     <description>前端html页面</description>
 
     <properties>
-        <version>v1.0.1800</version>
+        <version>v1.0.1900</version>
         <java.version>1.8</java.version>
         <swagger.version>2.9.2</swagger.version>
     </properties>
