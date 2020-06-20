@@ -16,6 +16,7 @@
     <description>网关</description>
 
     <properties>
+        <version>v1.0.1200</version>
         <java.version>1.8</java.version>
         <spring-cloud.version>Greenwich.SR2</spring-cloud.version>
         <joda-time.version>2.10.3</joda-time.version>
@@ -72,7 +73,7 @@
 
     <build>
         <!-- package名称，版本号 -->
-        <finalName>gateway-1.0.0</finalName>
+        <finalName>gateway</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

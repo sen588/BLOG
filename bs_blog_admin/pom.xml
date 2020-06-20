@@ -16,6 +16,7 @@
     <description>后台admin服务</description>
 
     <properties>
+        <version>v1.0.1200</version>
         <java.version>1.8</java.version>
         <mapper.version>4.1.5</mapper.version>
         <mysql.version>5.1.27</mysql.version>
@@ -70,7 +71,7 @@
 
     <build>
         <!-- package名称，版本号 -->
-        <finalName>admin-1.0.0</finalName>
+        <finalName>admin</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
