@@ -16,7 +16,7 @@
     <description>核心模块</description>
 
     <properties>
-        <version>v1.0.1200</version>
+        <version>v1.0.1210</version>
         <java.version>1.8</java.version>
         <swagger.version>2.9.2</swagger.version>
         <nacos.version>0.2.2.RELEASE</nacos.version>

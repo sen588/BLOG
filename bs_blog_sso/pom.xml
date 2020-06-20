@@ -16,7 +16,7 @@
     <description>单点登录</description>
 
     <properties>
-        <version>v1.0.1200</version>
+        <version>v1.0.1210</version>
         <java.version>1.8</java.version>
         <swagger.version>2.9.2</swagger.version>
         <jjwt.version>0.9.0</jjwt.version>
