@@ -54,11 +54,14 @@ package(){
     git clone --branch ${tag} ${application_source} ${SERVICE_DIR_TAG}/tag
     cd ${SERVICE_DIR_TAG}/tag/bs_blog_${bs}
     mvn clean package
-    cd ${SERVICE_DIR_TAG}
-    rm -rf ${bs}.jar
+    rm -rf ${SERVICE_DIR_TAG}/${bs}.jar
     mv ${SERVICE_DIR_TAG}/tag/bs_blog_${bs}/target/${bs}.jar ${SERVICE_DIR_TAG}
+
 }
 
+rm(){
+    rm -rf ${SERVICE_DIR_TAG}/tag
+}
 
 case "$1" in
 
@@ -77,7 +80,9 @@ case "$1" in
 	;;
 
 	package)
+	    rm
         package $1 $2 $3
+        rm
     ;;
 
     deploy)
@@ -89,12 +94,14 @@ case "$1" in
     ;;
 
     batch)
-        i=2
+        rm
+        i=3
         while [ ! -d "$i" ]
         do
             package $1 $2 $i
             i++
         done
+        rm
     ;;
 
 	*)
