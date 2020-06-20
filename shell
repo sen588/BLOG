@@ -2,7 +2,7 @@
 application_source="https://github.com/sen588/BLOG/tree"
 
 ## chang here
-SERVICE_DIR_TAG=/opt/applications/blog
+SERVICE_DIR_TAG=/opt/project/jar
 SPRING_PROFILES_ACTIVE=dev
 
 ## java env
@@ -46,25 +46,18 @@ stop(){
 		fi
 }
 
-
 package(){
-    profile=${1:-demo}
-	tag=${2:-trunk}
+    profile=${1}
+	tag=${2}
 	bs=${3}
 
-	case $tag in
-		trunk)
-			svn sw $application_source/$tag/bs_blog_$bs .
-		;;
-		*)
-			svn sw $application_source/$tag/server .
-		;;
-	esac
-
-	svn info > svn.info
-	mvn clean package assembly:assembly -P$profile
+    git clone --branch ${tag} ${application_source} ${SERVICE_DIR_TAG}/tag
+    cd ${SERVICE_DIR_TAG}/tag/bs_blog_${bs}
+    mvn clean package
+    cd ${SERVICE_DIR_TAG}
+    rm -rf ${bs}.jar
+    mv ${SERVICE_DIR_TAG}/tag/bs_blog_${bs}/target/${bs}.jar ${SERVICE_DIR_TAG}
 }
-
 
 
 case "$1" in
@@ -86,7 +79,6 @@ case "$1" in
 	package)
         package $1 $2 $3
     ;;
-
 
     deploy)
         stop    $1
