@@ -46,12 +46,17 @@ package(){
 	tag=${2}
 	bs=${3}
 
-    git clone --branch ${tag} ${application_source} ${SERVICE_DIR_TAG}/tag
     cd ${SERVICE_DIR_TAG}/tag/bs_blog_${bs}
     mvn clean package
     rm -rf ${SERVICE_DIR_TAG}/${bs}.jar
     mv ${SERVICE_DIR_TAG}/tag/bs_blog_${bs}/target/${bs}.jar ${SERVICE_DIR_TAG}
 
+}
+
+pull(){
+    tag=${1}
+
+    git clone --branch ${tag} ${application_source} ${SERVICE_DIR_TAG}/tag
 }
 
 remover(){
@@ -76,6 +81,7 @@ case "$1" in
 
 	package)
 	    remover $args
+	    pull    $2
         package $1 $2 $3
         remover $args
     ;;
@@ -90,11 +96,11 @@ case "$1" in
 
     batch)
         remover $args
+        pull    $2
         a=0
         for i in $@
         do
            ((a++))
-           echo $a
            if (( a>2 )); then
                package $1 $2 $i
                start   $i
