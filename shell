@@ -1,5 +1,5 @@
 #!/bin/sh
-application_source="https://github.com/sen588/BLOG.git"
+application_source="https://github.com/sen588/BLOG/tree"
 
 ## chang here
 SERVICE_DIR_TAG=/opt/applications/blog
@@ -46,17 +46,23 @@ stop(){
 		fi
 }
 
+
 package(){
-    profile=${1}
-	tag=${2}
+    profile=${1:-demo}
+	tag=${2:-trunk}
 	bs=${3}
 
-    git clone --branch ${tag} ${application_source} ${SERVICE_DIR_TAG}/${tag}
-    cd ${SERVICE_DIR_TAG}/${tag}/bs_blog_${bs}
-    mvn clean package
-    cd ${SERVICE_DIR_TAG}
-    rm -rf ${bs}.jar
-    mv ${SERVICE_DIR_TAG}/${tag}/bs_blog_${bs}/target/${bs}.jar ${SERVICE_DIR_TAG}
+	case $tag in
+		trunk)
+			svn sw $application_source/$tag/bs_blog_$bs .
+		;;
+		*)
+			svn sw $application_source/$tag/server .
+		;;
+	esac
+
+	svn info > svn.info
+	mvn clean package assembly:assembly -P$profile
 }
 
 
