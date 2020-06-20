@@ -16,7 +16,7 @@
     <description>网关</description>
 
     <properties>
-        <version>v1.0.1210</version>
+        <version>v1.0.1220</version>
         <java.version>1.8</java.version>
         <spring-cloud.version>Greenwich.SR2</spring-cloud.version>
         <joda-time.version>2.10.3</joda-time.version>
