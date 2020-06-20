@@ -99,9 +99,9 @@ case "$1" in
         for i in $@
         do
            package $1 $2 $i
+           echo "${i}"
            i++
         done
-        remover $args
     ;;
 
 	*)
