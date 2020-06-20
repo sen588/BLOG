@@ -97,7 +97,8 @@ case "$1" in
         remover $args
         for i in $@
         do
-           if [ i>2 ]; then
+           echo i
+           if (( i>2 )); then
                package $1 $2 $i
            else
                i++
