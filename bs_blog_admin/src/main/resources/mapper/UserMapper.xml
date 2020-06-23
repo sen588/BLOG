@@ -4,4 +4,5 @@
     <select id="findAll" resultType="com.bgamq.admin.entity.User">
         select * from user
     </select>
+
 </mapper>

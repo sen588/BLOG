@@ -10,12 +10,9 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * @author ceshi
- * @Title:
- * @Package
- * @Description:
- * @date 2020/6/2316:04
+ * 测试
  */
+
 @RestController
 public class UserController {
 

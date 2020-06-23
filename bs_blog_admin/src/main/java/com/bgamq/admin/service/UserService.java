@@ -12,5 +12,6 @@ import java.util.List;
  * @date 2020/6/2316:35
  */
 public interface UserService {
+
     List<User> findList();
 }
