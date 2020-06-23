@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: bs-blog-sso
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 47.92.242.53:8848
+      config:
+        server-addr: 47.92.242.53:8848
+        namespace: fee6569b-bf8c-4362-a725-714f785f780f
