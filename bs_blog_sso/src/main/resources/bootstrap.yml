@@ -8,3 +8,5 @@ spring:
       config:
         server-addr: 47.92.242.53:8848
         namespace: fee6569b-bf8c-4362-a725-714f785f780f
+
+
